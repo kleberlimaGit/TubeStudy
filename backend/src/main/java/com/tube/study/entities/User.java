@@ -27,7 +27,7 @@ public class User implements Serializable {
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
-	private Set<Collection> collection = new HashSet<>();
+	private Set<Collection> collections = new HashSet<>();
 	
 	public User() {
 		
@@ -66,7 +66,7 @@ public class User implements Serializable {
 	
 
 	public Set<Collection> getCollection() {
-		return collection;
+		return collections;
 	}
 
 	@Override
