@@ -2,7 +2,7 @@ package com.tube.study.dto;
 
 import java.io.Serializable;
 
-import com.tube.study.entities.Collection;
+import com.tube.study.entities.Folder;
 import com.tube.study.entities.Thumbnail;
 import com.tube.study.entities.Video;
 
@@ -16,7 +16,7 @@ public class ThumbnailDTO implements Serializable {
 	
 	private Video video;
 	
-	private Collection collection;
+	private Folder folder;
 
 	public ThumbnailDTO() {
 		super();
@@ -26,7 +26,7 @@ public class ThumbnailDTO implements Serializable {
 		id = entity.getId();
 		imgUrl = entity.getImgUrl();
 		video = entity.getVideo();
-		collection = entity.getCollection();
+		folder = entity.getFolder();
 	}
 
 	public Long getId() {
@@ -53,13 +53,15 @@ public class ThumbnailDTO implements Serializable {
 		this.video = video;
 	}
 
-	public Collection getCollection() {
-		return collection;
+	public Folder getFolder() {
+		return folder;
 	}
 
-	public void setCollection(Collection collection) {
-		this.collection = collection;
+	public void setFolder(Folder folder) {
+		this.folder = folder;
 	}
+
+
 	
 	
 }

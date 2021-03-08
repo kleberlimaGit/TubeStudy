@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.tube.study.entities.Collection;
+import com.tube.study.entities.Folder;
 import com.tube.study.entities.User;
 
-public class CollectionDTO implements Serializable {
+public class FolderDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
@@ -16,12 +16,12 @@ public class CollectionDTO implements Serializable {
 	private User user;
 	private Set<ThumbnailDTO> thumbnails = new HashSet<>();
 
-	public CollectionDTO() {
+	public FolderDTO() {
 		super();
 	}
 
 	
-	public CollectionDTO(Collection entity) {
+	public FolderDTO(Folder entity) {
 		id = entity.getId();
 		imgUrl = entity.getImgUrl();
 		name = entity.getName();

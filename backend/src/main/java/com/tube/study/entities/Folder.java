@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_collection")
-public class Collection implements Serializable {
+@Table(name = "tb_folder")
+public class Folder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,17 +29,17 @@ public class Collection implements Serializable {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@OneToMany(mappedBy = "collection")
+	@OneToMany(mappedBy = "folder")
 	private Set<Thumbnail> thumbnail = new HashSet<>();
 	
 
-	public Collection() {
+	public Folder() {
 		super();
 	}
 
 	
 
-	public Collection(Long id, String imgUrl, String name, User user, Set<Thumbnail> thumbnail) {
+	public Folder(Long id, String imgUrl, String name, User user, Set<Thumbnail> thumbnail) {
 		super();
 		this.id = id;
 		this.imgUrl = imgUrl;
@@ -104,7 +104,7 @@ public class Collection implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Collection other = (Collection) obj;
+		Folder other = (Folder) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

@@ -29,8 +29,8 @@ public class Thumbnail implements Serializable {
 	private Video video;
 	
 	@ManyToOne
-	@JoinColumn(name = "collection_id")
-	private Collection collection;
+	@JoinColumn(name = "folder_id")
+	private Folder folder;
 
 	public Thumbnail() {
 		
@@ -64,9 +64,13 @@ public class Thumbnail implements Serializable {
 		this.video = video;
 	}
 	
-	
-	public Collection getCollection() {
-		return collection;
+
+	public Folder getFolder() {
+		return folder;
+	}
+
+	public void setFolder(Folder folder) {
+		this.folder = folder;
 	}
 
 	@Override

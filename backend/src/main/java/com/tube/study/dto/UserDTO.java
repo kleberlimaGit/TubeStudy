@@ -15,7 +15,7 @@ public class UserDTO implements Serializable {
 	private String email;
 	
 	private Set<RoleDTO> roles = new HashSet<>();
-	private Set<CollectionDTO> collections = new HashSet<>();
+	private Set<FolderDTO> folders = new HashSet<>();
 
 	public UserDTO() {
 		super();
@@ -36,7 +36,7 @@ public class UserDTO implements Serializable {
 		email = entity.getEmail();
 		
 		entity.getRoles().forEach(role -> this.roles.add(new  RoleDTO(role)));
-		entity.getCollections().forEach(collection -> this.collections.add(new CollectionDTO(collection)));
+		entity.getFolders().forEach(folder -> this.folders.add(new FolderDTO(folder)));
 	}
 
 	public Long getId() {
@@ -75,8 +75,8 @@ public class UserDTO implements Serializable {
 		return roles;
 	}
 
-	public Set<CollectionDTO> getCollections() {
-		return collections;
+	public Set<FolderDTO> getFolders() {
+		return folders;
 	}
 }
 
