@@ -1,0 +1,12 @@
+package com.tube.study.repositories;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.tube.study.entities.Role;
+
+@Repository
+public interface RoleRepository extends JpaRepository<Role, Long>{
+	
+
+}

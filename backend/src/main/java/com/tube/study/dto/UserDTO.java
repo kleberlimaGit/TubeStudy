@@ -10,30 +10,33 @@ public class UserDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
-	
+	private String firstName;
+	private String lastName;
 	private String email;
 	
-	private String password;
-	
+	private Set<RoleDTO> roles = new HashSet<>();
 	private Set<CollectionDTO> collections = new HashSet<>();
 
 	public UserDTO() {
 		super();
 	}
 
-	public UserDTO(Long id, String email, String password) {
+	public UserDTO(Long id, String firstName, String lastName, String email) {
 		super();
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
-		this.password = password;
-		
 	}
-	
+
 	public UserDTO(User entity) {
 		id = entity.getId();
+		firstName = entity.getFirstName();
+		lastName = entity.getLastName();
 		email = entity.getEmail();
-		password = entity.getPassword();
-		entity.getCollection().forEach(collection -> this.collections.add(new CollectionDTO(collection)));
+		
+		entity.getRoles().forEach(role -> this.roles.add(new  RoleDTO(role)));
+		entity.getCollections().forEach(collection -> this.collections.add(new CollectionDTO(collection)));
 	}
 
 	public Long getId() {
@@ -44,6 +47,22 @@ public class UserDTO implements Serializable {
 		this.id = id;
 	}
 
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -52,17 +71,13 @@ public class UserDTO implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public Set<RoleDTO> getRoles() {
+		return roles;
 	}
 
 	public Set<CollectionDTO> getCollections() {
 		return collections;
 	}
-	
-	
 }
+
+	

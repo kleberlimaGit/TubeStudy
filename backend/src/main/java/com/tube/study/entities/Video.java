@@ -10,23 +10,31 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_video")
-public class Video implements Serializable{
+public class Video implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String url;
-	private String description;
+	private String text;
 
 	public Video() {
-		
+
 	}
 
 	public Video(String url, String description) {
 		this.url = url;
-		this.description = description;
+		this.text = description;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUrl() {
@@ -37,12 +45,12 @@ public class Video implements Serializable{
 		this.url = url;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getText() {
+		return text;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setText(String text) {
+		this.text = text;
 	}
 
 }

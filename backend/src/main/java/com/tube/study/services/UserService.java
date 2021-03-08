@@ -11,10 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tube.study.dto.CollectionDTO;
+import com.tube.study.dto.RoleDTO;
 import com.tube.study.dto.UserDTO;
 import com.tube.study.entities.Collection;
+import com.tube.study.entities.Role;
 import com.tube.study.entities.User;
 import com.tube.study.repositories.CollectionRepository;
+import com.tube.study.repositories.RoleRepository;
 import com.tube.study.repositories.UserRepository;
 
 @Service
@@ -24,7 +27,10 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
+	@Autowired
 	private CollectionRepository collectionRepository;
+	
+	private RoleRepository roleRepository;
 	
 	@Transactional(readOnly = true)
 	public Page<UserDTO> findAllPaged(PageRequest pageRequest){
@@ -37,7 +43,7 @@ public class UserService {
 	}
 	
 	
-	public UserDTO insertUser(UserDTO dto) {
+	public UserDTO InsertUser(UserDTO dto) {
 		User user = new User();
 		copyDtoToEntity(dto, user);
 		
@@ -73,13 +79,18 @@ public class UserService {
 	
 	private void copyDtoToEntity(UserDTO dto, User entity) {
 		
-		entity.setEmail(dto.getEmail());
-		entity.setPassword(dto.getPassword());
-		
-		entity.getCollection().clear();
+		entity.setFirstName(dto.getFirstName());
+		entity.setLastName(dto.getLastName());
+		entity.setEmail(dto.getEmail());		
+		entity.getCollections().clear();
 		for(CollectionDTO collectionDto: dto.getCollections()) {
 			Collection collection = collectionRepository.getOne(collectionDto.getId());
-			entity.getCollection().add(collection);
+			entity.getCollections().add(collection);
+		}
+		entity.getRoles().clear();
+		for(RoleDTO roleDto : dto.getRoles()) {
+			Role role = roleRepository.getOne(roleDto.getId());
+			entity.getRoles().add(role);
 		}
 		
 	}

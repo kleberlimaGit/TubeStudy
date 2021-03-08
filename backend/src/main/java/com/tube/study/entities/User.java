@@ -6,14 +6,18 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tb_user")
+@Table(name = "tb_user")
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,20 +25,28 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+	private String firstName;
+	private String lastName;
 	@Column(unique = true, nullable = false)
 	private String email;
 	private String password;
-	
+
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles = new HashSet<>();
+
 	@OneToMany(mappedBy = "user")
 	private Set<Collection> collections = new HashSet<>();
-	
+
 	public User() {
-		
+
 	}
 
-	public User(Long id, String email, String password) {
+	public User(Long id, String firstName, String lastName, String email, String password) {
+		super();
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 	}
@@ -45,6 +57,22 @@ public class User implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -59,13 +87,16 @@ public class User implements Serializable {
 		return password;
 	}
 
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
 
-	public Set<Collection> getCollection() {
+	public Set<Collection> getCollections() {
 		return collections;
 	}
 
@@ -93,10 +124,5 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 
 }
