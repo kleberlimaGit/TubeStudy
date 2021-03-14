@@ -1,11 +1,8 @@
 package com.tube.study.dto;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import com.tube.study.entities.Folder;
-import com.tube.study.entities.User;
 
 public class FolderDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -13,8 +10,8 @@ public class FolderDTO implements Serializable {
 	private Long id;
 	private String imgUrl;
 	private String name;
-	private User user;
-	private Set<ThumbnailDTO> thumbnails = new HashSet<>();
+	private Long userId;
+//	private Set<ThumbnailDTO> thumbnails = new HashSet<>();
 
 	public FolderDTO() {
 		super();
@@ -25,8 +22,8 @@ public class FolderDTO implements Serializable {
 		id = entity.getId();
 		imgUrl = entity.getImgUrl();
 		name = entity.getName();
-		user = entity.getUser();
-		entity.getThumbnail().forEach(thumbnail ->this.thumbnails.add(new ThumbnailDTO(thumbnail)));
+		userId = entity.getUser().getId();
+//		entity.getThumbnail().forEach(thumbnail ->this.thumbnails.add(new ThumbnailDTO(thumbnail)));
 	}
 
 
@@ -60,20 +57,20 @@ public class FolderDTO implements Serializable {
 	}
 
 
-	public User getUser() {
-		return user;
+	public Long getUserId() {
+		return userId;
 	}
 
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 
-	public Set<ThumbnailDTO> getThumbnails() {
-		return thumbnails;
-	}
-	
+//	public Set<ThumbnailDTO> getThumbnails() {
+//		return thumbnails;
+//	}
+//	
 	
 
 }
