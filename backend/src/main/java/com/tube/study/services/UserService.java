@@ -20,12 +20,6 @@ public class UserService implements UserDetailsService{
 	private UserRepository repository;
 
 	
-	
-	
-	
-	
-	
-	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
