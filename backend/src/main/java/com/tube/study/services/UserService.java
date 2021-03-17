@@ -45,7 +45,7 @@ public class UserService implements UserDetailsService{
 			logger.error("User not found: " + username);
 			throw new UsernameNotFoundException("Email not found");
 		}
-		logger.info("User not found: " + username);
+		logger.info("User founded : " + username);
 		
 		return user;
 	}
