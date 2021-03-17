@@ -52,7 +52,7 @@ public class Thumbnail implements Serializable {
 	}
 
 	public String getImgUrl() {
-		String takeIdVideo = this.getVideo().getUrl().substring(31, 43);
+		String takeIdVideo = this.getVideo().getUrl().substring(32, 43);
 		imgUrl = "http://i3.ytimg.com/vi/"+ takeIdVideo +"/maxresdefault.jpg";
 		return imgUrl;
 	}

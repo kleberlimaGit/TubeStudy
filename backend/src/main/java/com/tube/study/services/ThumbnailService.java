@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tube.study.dto.FolderDTO;
 import com.tube.study.dto.ThumbnailDTO;
 import com.tube.study.entities.Folder;
 import com.tube.study.entities.Thumbnail;
@@ -27,12 +26,15 @@ public class ThumbnailService {
 	@Autowired
 	private AuthService authService;
 	
+
+	
 	@Transactional(readOnly = true)
-	public Page<ThumbnailDTO> findAllThumbnailFromFolder(FolderDTO folderDto, Pageable pageable){
-		User user = authService.authenticated();
-		Folder folder = folderRepository.getOne(folderDto.getId());
+	public Page<ThumbnailDTO> findAllThumbnailFromFolder(Long folderId, Pageable pageable){
 		
-		Page<Thumbnail> page = repository.findByFolder(user, folder, pageable);
+		User user = authService.authenticated();
+		
+		Folder folder = folderRepository.getOne(folderId);
+		Page<Thumbnail> page = repository.findByFolder(user, folder.getId(), pageable);
 		
 		return page.map(thumbnail -> new ThumbnailDTO(thumbnail));
 	}
